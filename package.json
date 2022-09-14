@@ -17,7 +17,7 @@
   "author": "Alex Milenkovic",
   "repository": {
     "type": "git",
-    "url": "git://github.com/senecajs/seneca-hubspot-provider.git"
+    "url": "git@github.com:BeAllAround/json-viewer.git"
   },
   "license": "MIT",
   "files": [
