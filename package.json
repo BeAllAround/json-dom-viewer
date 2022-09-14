@@ -1,0 +1,31 @@
+{
+  "name": "json-viewer",
+  "version": "0.0.1",
+  "description": "\"Json DOM Viewer\"",
+  "directories": {
+    "tests": "tests"
+  },
+  "main": "dist/viewer.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "parser",
+    "viewer"
+  ],
+  "author": "Alex Milenkovic",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/senecajs/seneca-hubspot-provider.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "index.js",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
