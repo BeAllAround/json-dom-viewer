@@ -9,7 +9,7 @@ You can use the module in your own projects by importing it or use it as a local
 
 
 Installation:
-        - clone the repository and run "npm install"
+        - clone the repository and run `npm install`
 
 To set up locally: 
-        - npm run start
+        `npm run start`
