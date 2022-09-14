@@ -8,11 +8,13 @@ You can load as many json files as you like. It currently supports: Booleans, Nu
 
 You can use the module in your own projects by importing it or use it as a local app.
 
-Preview:
+
+**Preview:**
+
 ![Alt Text](https://raw.githubusercontent.com/BeAllAround/json-viewer/main/Preview.gif)
 
-Installation:
-        - clone the repository and run `npm install`
+**Installation:**
+        clone the repository and run `npm install`
 
-To set up locally: 
+**To set up locally:** 
         `npm run start`
