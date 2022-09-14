@@ -7,6 +7,9 @@ function applyStyle(elem, style) {
 }
 
 function type(obj) {
+	if(!obj) { // JSON null
+		return false
+	}
 	return obj.constructor
 }
 
@@ -22,14 +25,25 @@ function simpleDiv(content = '', style, typing){
 	let el, html
 	el = document.createElement('div')
 	if(typeof content == 'string' && typing) {
-		el.innerHTML += '"'
+          el.innerHTML += '"'
 	}
-	el.innerHTML += content.toString()
+
+	// value content
+	if(content === null) { // null - special case
+	  el.innerHTML = 'null'
+	}else {
+	  el.innerHTML += content.toString()
+	}
+
 	if(typeof content == 'string' && typing) {
-		el.innerHTML += '"'
+	  el.innerHTML += '"'
 	}
 	if(style) {
-		applyStyle(el, style)
+	  applyStyle(el, style)
+	}
+
+	if(content === null) { // null - special case
+	  applyStyle(el, {color: 'gray',})
 	}
 	/*
 	return Object.create({ $el: el, addTo(elem){
@@ -107,8 +121,9 @@ function create(obj, dotted = false, spacing = 0){
 
 		if(type(obj[key]) === Object || type(obj[key]) == Array) {
 			el.appendChild(valueDom = viewJSON(obj[key], spacing+2))
+		}else if(obj[key] === null) {
+			el.appendChild(valueDom = valueDiv(null, true))
 		}else {
-
 			el.appendChild(valueDom = valueDiv(obj[key], true))
 		}
 
