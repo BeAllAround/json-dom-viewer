@@ -1,5 +1,8 @@
 {
   "bool": true,  
+  "obj": {},
+  "_null": null,
+  "_arr": [],
   "a": 1,
   "_string": "UU",
   "_float": 1.222,
