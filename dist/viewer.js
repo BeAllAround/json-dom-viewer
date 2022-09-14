@@ -79,8 +79,8 @@ function create(obj, dotted = false, spacing = 0){
 		el.appendChild(simpleDiv(SPACE))
 		// el.appendChild(simpleDiv(key.toString() + ': '))
 		
-		console.log(keyDom.style)
-		console.log(keyDom)
+		// console.log(keyDom.style)
+		// console.log(keyDom)
 
 
 		// :hover keyDom
@@ -171,8 +171,8 @@ function icon(obj, dict, spacing){
 		  obj[0].enabled = false
 		}
 
-		console.log('obj: ', obj[0])
-		el.parentNode.appendChild(obj[0]) // linked list - prev, next
+		// console.log('obj: ', obj[0]) // for debugging
+		el.parentNode.appendChild(obj[0]) // similar to linked list - prev, next
 	})
 	return el
 }
