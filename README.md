@@ -1,6 +1,6 @@
-# json-viewer
+# json-dom-viewer
 
-Written in pure DOM, Json Viewer is a data viewer for dissecting json data.
+Written in pure DOM, Json DOM Viewer is a data viewer for dissecting json data.
 
 It is inspired by the Javascript object viewer appearing in our console by either `console.log` call or simply typing out a global variable and hitting enter.
 
