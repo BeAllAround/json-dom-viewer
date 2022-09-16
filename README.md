@@ -15,7 +15,7 @@ You can use the module in your own projects by `importing` it or use it as a loc
 
 **Installation:**
         clone the repository and run `npm install`
-        or just run `npm i json-dom-viewer`
+        or just run `npm install json-dom-viewer`
 
 **To set up locally:** 
         `npm run start`
