@@ -17,7 +17,7 @@
   "author": "Alex Milenkovic",
   "repository": {
     "type": "git",
-    "url": "git@github.com:BeAllAround/json-viewer.git"
+    "url": "git@github.com:BeAllAround/json-dom-viewer.git"
   },
   "license": "MIT",
   "files": [
