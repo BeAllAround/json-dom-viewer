@@ -19,3 +19,15 @@ You can use the module in your own projects by `importing` it or use it as a loc
 
 **To set up locally:** 
         `npm run start`
+        
+**Importing**
+
+``<script type="module">``
+
+        import viewer from "./node_modules/json-dom-viewer/dist/viewer.js"
+        
+        Object.assign(document.body.style, {'background': 'black',})
+        
+        document.body.append(viewer.viewJSON({'a': 1}))
+        
+``</script>``
