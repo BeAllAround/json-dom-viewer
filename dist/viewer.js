@@ -24,6 +24,7 @@ function newType(constructor){
 function simpleDiv(content = '', style, typing){
 	let el, html
 	el = document.createElement('div')
+	applyStyle(el, {display: 'inline',})
 	if(typeof content == 'string' && typing) {
           el.innerHTML += '"'
 	}
@@ -64,7 +65,8 @@ function create(obj, dotted = false, spacing = 0){
 	let b
 	el = document.createElement('div')
 	el.id = 'dict'
-	applyStyle(el, {color: 'white'})
+	applyStyle(el, {color: 'white',})
+	applyStyle(el, {display: 'inline',})
 	// el.innerHTML = `${JSON.stringify(obj)}`
 	tab = SPACE.repeat(spacing)
 	
@@ -189,12 +191,14 @@ function icon(obj, dict, spacing){
 		// console.log('obj: ', obj[0]) // for debugging
 		el.parentNode.appendChild(obj[0]) // similar to linked list - prev, next
 	})
+	applyStyle(el, {display: 'inline',})
 	return el
 }
 
 function viewJSON(dict, spacing = 2) {
 	let obj = [create({}, true, 0)] // default
 	let div = document.createElement('div')
+	applyStyle(div, {display: 'inline',})
         div.appendChild(icon(obj, dict, spacing))
         div.appendChild(obj[0])
 	return div
