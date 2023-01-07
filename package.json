@@ -9,7 +9,8 @@
   "scripts": {
     "help": "electron -h",
     "test": "electron dist/main.js ./tests/model.json",
-    "test_bin": "electron bin/json-dom-viewer.js ./tests/model.json"
+    "test_bin": "electron bin/json-dom-viewer.js ./tests/model.json",
+    "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;"
   },
   "bin": {
     "json-dom-viewer": "bin/json-dom-viewer.js"
