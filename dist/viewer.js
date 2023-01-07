@@ -1,3 +1,14 @@
+const assert = require('assert')
+
+function deepEqual(...objs) {
+	try {
+		assert.deepEqual(...objs);
+		return true;
+	}catch(e) {
+		return false;
+	}
+}
+
 const SPACE = '&nbsp;',
       DOWN_TRIANGLE = '&#x25BC;',
       RIGHT_TRIANGLE = '&#x25B6;'
@@ -60,7 +71,7 @@ function valueDiv(value, typing) {
 	return simpleDiv(value, style, typing)
 }
 
-function create(obj, dotted = false, spacing = 0){
+function create(obj, dotted = false, spacing = 0, path, cache){
 	let el, html, tab, opening, closing
 	let b
 	el = document.createElement('div')
@@ -101,10 +112,12 @@ function create(obj, dotted = false, spacing = 0){
 
 		// :hover keyDom
 		keyDom.addEventListener('mouseover', (event) => {
+		  event.stopPropagation()
 		  applyStyle(keyDom, {opacity: 0.5, 'background-color': 'white', 
 			  padding: '1px', border: '1px solid white', 'border-radius': '6px',})
                 })
                 keyDom.addEventListener('mouseleave', (event) => {
+		  event.stopPropagation()
 		  applyStyle(keyDom, {opacity: '', 'background-color': '', 
 			  padding: '', border: '', 'border-radius': '',}) // reset style
                 })
@@ -113,16 +126,38 @@ function create(obj, dotted = false, spacing = 0){
 	          if(!keyDom.enabled) {
 		    applyStyle(valueDom, {'background-color': '#29323d',
 			    padding: '0px', border: '1px inset #5db0d7', 'border-radius': '6px',})
+	            /*
+	            let _popup = document.createElement('div')
+                    _popup.textContent = path
+                    _popup.id = 'popup'
+                    applyStyle(_popup, {'position': 'absolute',
+                                        'top': '200px',
+                                        'right': '200px',
+                    })
+                    keyDom.appendChild(_popup)
+		    */
 	            keyDom.enabled = true
 	          }else {
 		    applyStyle(valueDom, {'background-color': '',
 			    padding: '', border: '', 'border-radius': '',})
 	            keyDom.enabled = false
+	            /*
+		    for(let child of keyDom.children) {
+                          if(child.id == 'popup'){
+                                  child.remove()
+                          }
+                    }
+		    */
 	          }
 		})
 
 		if(type(obj[key]) === Object || type(obj[key]) == Array) {
-			el.appendChild(valueDom = viewJSON(obj[key], spacing+2))
+			if(Object.keys(obj[key]).length != 0) {
+			  el.appendChild(valueDom = viewJSON(obj[key], spacing+2, path+'.'+key, cache))
+		        }
+			else { // empty Object => {}
+			  el.appendChild(valueDom = simpleDiv("{}"))
+			}
 		}else if(obj[key] === null) {
 			el.appendChild(valueDom = valueDiv(null, true))
 		}else {
@@ -167,26 +202,66 @@ function create(obj, dotted = false, spacing = 0){
 
 	return el
 }
-function icon(obj, dict, spacing){
-	let el
-	let rendered
-	el = document.createElement('div')
-	el.innerHTML = RIGHT_TRIANGLE
-        applyStyle(el, {color: 'gray', 'font-size': '12px'}) // default style
+
+function icon(obj, dict, spacing, path, cache){
+	let el;
+	let rendered;
+	el = document.createElement('div');
+	el.innerHTML = RIGHT_TRIANGLE;
+        applyStyle(el, {color: 'gray', 'font-size': '12px'}); // default style
+	(function _open(){ 
+		let found_path = cache[path]
+		if(found_path) {
+	        	obj[0].remove()
+            	    	if(!obj[0].enabled) {
+               	   		el.innerHTML = DOWN_TRIANGLE
+                  		applyStyle(el, {color: 'gray'}) // update style
+                  		obj[0] = create(dict, false, spacing, path, cache)
+                  		applyStyle(obj[0], {display: "inline"})
+                  		obj[0].enabled = true
+                	} else {
+                  		applyStyle(el, {color: 'gray'}) // update style
+                  		el.innerHTML = RIGHT_TRIANGLE
+                  		obj[0] = create({}, true, 0, path, cache)
+                 		obj[0].enabled = false
+                	}
+                	// console.log(obj[0])
+		}
+
+	})()
 	el.addEventListener('click', e=>{
+		// console.log('e: ', e)
+		console.log('path: ', path)
+		e.stopPropagation()
 		obj[0].remove()
 		if(!obj[0].enabled) {
 		  el.innerHTML = DOWN_TRIANGLE
                   applyStyle(el, {color: 'gray'}) // update style
-		  obj[0] = create(dict, false, spacing)
+		  obj[0] = create(dict, false, spacing, path, cache)
 		  applyStyle(obj[0], {display: "inline"})
 		  obj[0].enabled = true
+
+		  cache[path] = true
+
+
 		} else {
                   applyStyle(el, {color: 'gray'}) // update style
 		  el.innerHTML = RIGHT_TRIANGLE
-		  obj[0] = create({}, true, 0)
+		  obj[0] = create({}, true, 0, path, cache)
 		  obj[0].enabled = false
+
+		  // delete all the paths starting with that path - this will help close child objects once a main parent object closes
+		  for(let _path in cache) {
+		    if(_path.startsWith(path + '.') || _path === path) { // '.b1' startsWith '.b' bug
+		      delete cache[_path]
+		    }
+		  }
+		  // delete cache[path]
+		
 		}
+
+		// console.log('cache: ', cache)
+		// console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
 		// console.log('obj: ', obj[0]) // for debugging
 		el.parentNode.appendChild(obj[0]) // similar to linked list - prev, next
@@ -195,19 +270,20 @@ function icon(obj, dict, spacing){
 	return el
 }
 
-function viewJSON(dict, spacing = 2) {
+function viewJSON(dict, spacing = 2, path = '', cache = {}) {
 	let obj = [create({}, true, 0)] // default
 	let div = document.createElement('div')
 	applyStyle(div, {display: 'inline',})
-        div.appendChild(icon(obj, dict, spacing))
+        div.appendChild(icon(obj, dict, spacing, path, cache))
         div.appendChild(obj[0])
 	return div
 }
 
-function viewJSONAsString(json_string) {
+function viewJSONAsString(json_string) { // obsolete
 	return viewJSON(JSON.parse(json_string))
 }
 
-export default {name: 'viewer', 
+module.exports = 
+	{name: 'json-dom viewer', 
 	        viewJSON, 
-	        viewJSONAsString}
+	        viewJSONAsString,}
