@@ -1,14 +1,18 @@
 {
   "name": "json-dom-viewer",
-  "version": "0.0.13",
+  "version": "0.0.31",
   "description": "\"Json DOM Viewer\"",
   "directories": {
     "tests": "tests"
   },
-  "main": "dist/viewer.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "http-server -c-1",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "help": "electron -h",
+    "test": "electron dist/main.js ./tests/model.json",
+    "test_bin": "electron bin/json-dom-viewer.js ./tests/model.json"
+  },
+  "bin": {
+    "json-dom-viewer": "bin/json-dom-viewer.js"
   },
   "keywords": [
     "parser",
@@ -22,10 +26,12 @@
   "license": "MIT",
   "files": [
     "dist",
-    "index.js",
-    "LICENSE"
+    "bin/json-dom-viewer.js",
+    "tests",
+    "LICENSE",
+    "README.md"
   ],
   "dependencies": {
-    "http-server": "^14.1.1"
+    "electron": "21.0.1"
   }
 }
