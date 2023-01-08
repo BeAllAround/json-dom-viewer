@@ -16,8 +16,10 @@ You can use the module in your own projects by `importing` it or use it as an el
 **Installation:**
         npm: `> npm install json-dom-viewer`
 
-**To set up locally:** 
-        `npm run start`
+**View a JSON file:** 
+        `"scripts": {
+                "view-nodezoo": "json-dom-viewer ./model/model.json"
+        }`
         
 **Importing**
 
