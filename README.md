@@ -18,7 +18,7 @@ You can use the module in your own projects by `importing` it or use it as an el
 
 **View a JSON file:** 
         `"scripts": {
-                "view-nodezoo": "json-dom-viewer ./model/model.json"
+                "view-json": "json-dom-viewer ./model/model.json"
         }`
         
 **Importing**
