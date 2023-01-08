@@ -6,7 +6,7 @@ It is inspired by the Javascript object viewer appearing in our console by eithe
 
 You can load as many json files as you like. It currently supports: `null`, `Booleans`, `Numbers`, `Strings`, `Objects`, and `Arrays` (parsed as indexed items). Have a look at the Preview and check out its readability yourself!
 
-You can use the module in your own projects by `importing` it or use it as a local app.
+You can use the module in your own projects by `importing` it or use it as an electron-based tool.
 
 
 **Preview:**
