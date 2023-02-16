@@ -100,7 +100,7 @@ function create(obj, dotted = false, spacing = 0, path, cache){
 		key = keys[i]
 		// console.log([key, obj[key]])
 		el.appendChild(document.createElement('br'))
-		el.appendChild(simpleDiv(tab+tab))
+		el.appendChild(simpleDiv(tab))
 		el.appendChild(keyDom = simpleDiv(key.toString(), {color: '#5db0d7',}))
 		el.appendChild(simpleDiv(':'))
 		el.appendChild(simpleDiv(SPACE))
@@ -165,7 +165,7 @@ function create(obj, dotted = false, spacing = 0, path, cache){
 		}
 
 		if(keys.length - i - 1) {
-			el.appendChild(simpleDiv(', '))
+			el.appendChild(simpleDiv(','))
 		}
 
 		/*
@@ -186,6 +186,9 @@ function create(obj, dotted = false, spacing = 0, path, cache){
 	}
 	if(keys.length != 0) {
 		el.appendChild(document.createElement('br')) // '\n'
+		tab = SPACE.repeat(spacing-2)
+		// ( spacing - indent ) => correct indent
+		console.log('tab: ', {tab, path, spacing} )
 		el.appendChild(closing = simpleDiv(tab + '}'))
 	}else {
 		el.appendChild(closing = simpleDiv('}'))

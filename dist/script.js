@@ -62,13 +62,14 @@ function render_error(e) {
 }
 
 (async ()=>{
+  const indent = 2
 
   try{
     let dict = await read_dict(fileName)
     let view_dom
     let cache = {}
     setTimeout(()=>{
-      view_dom = viewer.viewJSON(dict, 2, '', cache)
+      view_dom = viewer.viewJSON(dict, indent, '', cache)
       main.append(view_dom);
     }, 11)
 
@@ -85,7 +86,7 @@ function render_error(e) {
 	      return 1;
       }
       view_dom.remove()
-      view_dom = viewer.viewJSON(dict, 2, '', cache)
+      view_dom = viewer.viewJSON(dict, indent, '', cache)
       main.append(view_dom);
       return 0;
     })
