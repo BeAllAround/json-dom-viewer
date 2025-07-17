@@ -1,5 +1,8 @@
 # json-dom-viewer
 
+| ![Voxgig](https://www.voxgig.com/res/img/vgt01r.png) | This open source module is sponsored and supported by [Voxgig](https://www.voxgig.com). |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
+
 Written in pure DOM, Json DOM Viewer is a data viewer for dissecting json data.
 
 It is inspired by the Javascript object viewer appearing in our console by either `console.log` call or simply typing out a global variable and hitting enter.
