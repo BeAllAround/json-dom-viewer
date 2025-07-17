@@ -1,6 +1,6 @@
 {
   "name": "json-dom-viewer",
-  "version": "0.0.33",
+  "version": "1.0.0",
   "description": "\"Json DOM Viewer\"",
   "directories": {
     "tests": "tests"
